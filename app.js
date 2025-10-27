@@ -18,8 +18,8 @@ const TILE_CONFIGS = {
         attribution: '© OpenStreetMap contributors' 
     },
     'bw': { 
-        url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', // A light, high-contrast monochrome map
-        attribution: '© Stadia Maps, © OpenMapTiles, © OpenStreetMap contributors' 
+        url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', 
+        attribution: '© CartoDB, © OpenStreetMap contributors' 
     },
     'terrain': { 
         url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', 
@@ -39,7 +39,7 @@ function changeTileLayer(styleKey) {
     currentTileLayer = L.tileLayer(config.url, {
         maxZoom: 19,
         attribution: config.attribution,
-        subdomains: ['a', 'b', 'c'] 
+        ubdomains: ['a', 'b', 'c', 'd']
     }).addTo(map);
 }
 
