@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simplified RF Outdoor Link Planner</title>
+    <!-- Leaflet CSS for mapping -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Leaflet JS library -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="map"></div>
+    <div id="sidebar">
+        <h2>RF Link Planner</h2>
+        <p>1. Click map to place a tower. (Default: 5.8 GHz)</p>
+        <p>2. Click a tower to edit its frequency or start a link.</p>
+        <p>3. Click a second tower with a matching frequency to complete the link.</p>
+        <p>4. Click the link line to visualize the Fresnel Zone.</p>
+        
+        <hr/>
+        <h3>Map Style</h3>
+        <div class="flex space-x-2">
+            <button id="bw-btn" class="map-style-btn">Black & White</button>
+            <button id="terrain-btn" class="map-style-btn">Terrain</button>
+            <button id="osm-btn" class="map-style-btn">Standard</button>
+        </div>
+        
+        <hr/>
+        <h3>Towers (<span id="tower-count">0</span>)</h3>
+        <div id="tower-list"></div>
+        <hr/>
+        <h3>Links (<span id="link-count">0</span>)</h3>
+        <div id="link-list"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
