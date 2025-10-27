@@ -177,13 +177,13 @@ function createLink(towerA, towerB) {
 function handleLinkClick(link, event) {
     // Deselect previous link
     if (linkPlanner.selectedLink) {
-        linkPlanner.selectedLink.linkLine.setStyle({ className: 'leaflet-link-line' });
+        linkPlanner.selectedLink.linkLine.setStyle({ class: 'leaflet-link-line' });
     }
-    
+
     // Select new link and highlight
     linkPlanner.selectedLink = link;
-    link.linkLine.setStyle({ className: 'leaflet-link-line-selected' });
-    
+    link.linkLine.setStyle({ class: 'leaflet-link-line-selected' });
+
     // Calculate and draw Fresnel Zone
     drawFresnelZone(link);
     
@@ -209,11 +209,15 @@ function drawFresnelZone(link) {
     const frequencyHz = towerA.frequencyGHz * 1e9; // Convert GHz to Hz
     const maxFresnelRadiusMeters = calculateMaxFresnelRadius(frequencyHz, distanceMeters);
 
+    console.log(maxFresnelRadiusMeters)
+
     // 2. Find Center and Bearing (Angle)
     const centerLatlng = L.latLng(
         (latlngA.lat + latlngB.lat) / 2,
         (latlngA.lng + latlngB.lng) / 2
     );
+
+    console.log(centerLatlng)
 
     // Bearing calculation for rotation (North is 0 degrees, East is 90)
     const toRad = (deg) => deg * Math.PI / 180;
@@ -244,17 +248,17 @@ function drawFresnelZone(link) {
     }
     
     // Get pixel coordinates from Leaflet's projection
-    const centerPoint = map.latLngToLayerPoint(centerLatlng);
-    const pA = map.latLngToLayerPoint(latlngA);
-    const pB = map.latLngToLayerPoint(latlngB);
+    const centerPoint = map.latLngToContainerPoint(centerLatlng);
+    const pA = map.latLngToContainerPoint(latlngA);
+    const pB = map.latLngToContainerPoint(latlngB);
     
     // --- Adjust coordinates for map pan offset ---
     // Leaflet's layer points are relative to a dynamic origin.
     // We must subtract the map's current pixel origin to make them relative to the SVG's top-left corner (0,0).
     const mapPaneOffset = map.getPixelOrigin(); 
 
-    const cx = centerPoint.x - mapPaneOffset.x;
-    const cy = centerPoint.y - mapPaneOffset.y;
+    const cx = centerPoint.x;
+    const cy = centerPoint.y;
     // ------------------------------------------
 
     const lengthPixels = pA.distanceTo(pB); // Link length in screen pixels
